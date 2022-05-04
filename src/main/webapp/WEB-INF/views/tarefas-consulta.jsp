@@ -104,8 +104,10 @@ input.error {
 									<span class="badge bg-success">Baixa</span>
 								</c:if></td>
 							<td>${t.descricao}</td>
-							<td><a href="/agendaweb/tarefas-edicao"
-								class="btn btn-primary btn-sm"> Editar </a> <a href="#"
+							<td><a href="/agendaweb/tarefas-edicao?id=${t.idTarefa}"
+								class="btn btn-primary btn-sm"> Editar </a> <a
+								href="/agendaweb/tarefas-exclusao?id=${t.idTarefa}"
+								onclick="return confirm('Deseja realmente excluir a tarefa: ${t.nome}?');"
 								class="btn btn-danger btn-sm"> Excluir </a></td>
 						</tr>
 
@@ -186,6 +188,13 @@ input.error {
 
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
