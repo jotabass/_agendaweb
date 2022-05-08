@@ -3,6 +3,7 @@ package br.com.cotiinformatica.repositories;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import br.com.cotiinformatica.entities.Usuario;
 import br.com.cotiinformatica.factories.ConnectionFactory;
 import br.com.cotiinformatica.interfaces.IUsuarioRepository;
@@ -19,6 +20,19 @@ public class UsuarioRepository implements IUsuarioRepository {
 		statement.setString(1, usuario.getNome());
 		statement.setString(2, usuario.getEmail());
 		statement.setString(3, usuario.getSenha());
+		statement.execute();
+
+		connection.close();
+	}
+
+	@Override
+	public void update(Integer idUsuario, String novaSenha) throws Exception {
+
+		Connection connection = ConnectionFactory.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("update usuario set senha=md5(?) where idusuario=?");
+		statement.setString(1, novaSenha);
+		statement.setInt(2, idUsuario);
 		statement.execute();
 
 		connection.close();
@@ -75,4 +89,5 @@ public class UsuarioRepository implements IUsuarioRepository {
 		connection.close();
 		return usuario;
 	}
+
 }
